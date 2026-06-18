@@ -5,12 +5,18 @@ import com.priya.employeeapi.entity.Employee;
 import com.priya.employeeapi.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl
         implements EmployeeService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(EmployeeServiceImpl.class);
 
     private final EmployeeRepository repository;
 
@@ -22,6 +28,8 @@ public class EmployeeServiceImpl
     @Override
     public EmployeeDTO createEmployee(
             EmployeeDTO dto) {
+
+        logger.info("Creating employee");
 
         Employee employee = new Employee();
 
@@ -40,6 +48,8 @@ public class EmployeeServiceImpl
     @Override
     public List<EmployeeDTO>
     getAllEmployees() {
+
+        logger.info("Fetching all employees");
 
         return repository.findAll()
                 .stream()
@@ -63,6 +73,8 @@ public class EmployeeServiceImpl
     public EmployeeDTO
     getEmployeeById(Long id) {
 
+        logger.info("Fetching employee with ID: {}", id);
+
         Employee emp =
                 repository.findById(id)
                         .orElseThrow();
@@ -84,6 +96,8 @@ public class EmployeeServiceImpl
             Long id,
             EmployeeDTO dto) {
 
+        logger.info("Updating employee with ID: {}", id);
+
         Employee emp =
                 repository.findById(id)
                         .orElseThrow();
@@ -102,6 +116,9 @@ public class EmployeeServiceImpl
 
     @Override
     public void deleteEmployee(Long id) {
+
+        logger.info("Deleting employee with ID: {}", id);
+
         repository.deleteById(id);
     }
 }

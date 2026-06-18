@@ -1,4 +1,4 @@
-package com.priya.employeapi;
+package com.priya.employeeapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
